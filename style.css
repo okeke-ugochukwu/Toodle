@@ -56,6 +56,9 @@
     transition: .7s;
     margin-bottom: 5px;
 }
+:: placeholder {
+   color:black;
+}
 .button {
     width: 20%;
     max-width: 80px;
