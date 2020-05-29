@@ -45,16 +45,16 @@
     transition: ease-in-out .7s;
     color: white;
 }
-:-webkit-input-placeholder {
+input:-webkit-input-placeholder {
   color: black;​
 }​
-::-moz-placeholder { 
+input::-moz-placeholder { 
   color: black;​
 }​
-:-ms-input-placeholder {
+input:-ms-input-placeholder {
   color: black;
 ​}​
-:-moz-placeholder {
+input:-moz-placeholder {
   color: black;
 }
 input {
