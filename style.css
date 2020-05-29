@@ -45,7 +45,19 @@
     transition: ease-in-out .7s;
     color: white;
 }
-#input {
+:-webkit-input-placeholder {
+  color: black;​
+}​
+::-moz-placeholder { 
+  color: black;​
+}​
+:-ms-input-placeholder {
+  color: black;
+​}​
+:-moz-placeholder {
+  color: black;
+}
+input {
     height: 40px;
     width: 60%;
     padding-left: 10px;
@@ -56,9 +68,7 @@
     transition: .7s;
     margin-bottom: 5px;
 }
-:: placeholder {
-   color:black;
-}
+
 .button {
     width: 20%;
     max-width: 80px;
