@@ -67,8 +67,10 @@ input {
     background-color: rgba(255, 255, 255, 0);
     transition: .7s;
     margin-bottom: 5px;
+    outline-style:none;
+    box-shadow:none;
+    border-color:transparent;
 }
-
 .button {
     width: 20%;
     max-width: 80px;
