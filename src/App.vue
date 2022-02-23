@@ -1,15 +1,23 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <mobileHeader />
+  <helloSection />
+  <catgSection />
+  <taskSection />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import mobileHeader from './components/mobileHeader.vue'
+import helloSection from './components/helloSection.vue'
+import catgSection from './components/catgSection.vue'
+import taskSection from './components/taskSection.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    mobileHeader,
+    helloSection,
+    catgSection,
+    taskSection
   }
 }
 </script>
