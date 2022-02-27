@@ -1,24 +1,28 @@
 <template>
-  <mobileHeader />
-  <helloSection />
-  <catgSection />
-  <taskSection />
+    <sideBar />
+    <appFrame />
 </template>
 
 <script>
-import mobileHeader from './components/mobileHeader.vue'
-import helloSection from './components/helloSection.vue'
-import catgSection from './components/catgSection.vue'
-import taskSection from './components/taskSection.vue'
+import sideBar from './components/parents/sideBar.vue'
+import appFrame from './components/parents/appFrame.vue'
+
 
 export default {
   name: 'App',
+
   components: {
-    mobileHeader,
-    helloSection,
-    catgSection,
-    taskSection
+    appFrame,
+    sideBar
+  },
+
+  methods: {
+    showSideBar() {
+
+    }
   }
+
+
 }
 </script>
 
