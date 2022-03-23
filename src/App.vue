@@ -1,29 +1,35 @@
 <template>
     <sideBar />
     <appFrame />
+
 </template>
 
 <script>
-import sideBar from './components/parents/sideBar.vue'
-import appFrame from './components/parents/appFrame.vue'
+  import sideBar from './components/parents/sideBar.vue';
+  import appFrame from './components/parents/appFrame.vue';
 
 
-export default {
-  name: 'App',
 
-  components: {
-    appFrame,
-    sideBar
-  },
+  export default {
+    name: 'App',
 
-  methods: {
-    showSideBar() {
+    components: {
+      sideBar,
+      appFrame
+    },
+
+    methods: {
+      showSideBar() {
+
+      }
+      },
+
+    props: {
 
     }
+
+
   }
-
-
-}
 </script>
 
 <style lang="scss">

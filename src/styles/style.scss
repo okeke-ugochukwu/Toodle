@@ -6,7 +6,7 @@
 @mixin flexCenter {
     display: flex;
     align-items: center;
-    justify-content: self;
+    justify-content: center;
 }
 @mixin showAll {
     * {
@@ -22,6 +22,16 @@
 
     overflow: scroll;
     scrollbar-width: none;
+}
+@mixin scale {
+    &:hover {
+        transform: scale(1.12);
+    }
+}
+@mixin hoverPointer {
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 // @include showAll();
@@ -43,6 +53,7 @@ h4 {
     font-weight: 600;
     letter-spacing: .1em;
     color: $grey;
+    width: max-content;
 }
 .mainHeadings {
     color: $darkBlue;
@@ -71,6 +82,7 @@ section {
 .sideBarShown {
     transform: scale(.9) translateX(250px);
     border-radius: 40px;
+    position: fixed;
 }
 
 //side bar (which fills entire page in background
@@ -82,12 +94,15 @@ section {
     align-items: center;
     padding-left: 50px;
     color: $white;
+
 }
 
 // header section
 header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    z-index: 3;
 }
 .hamburger {
 
@@ -116,6 +131,21 @@ header {
         }
     }
 }
+.colorSwitch {
+    width: max-content;
+    @include hoverPointer();
+    overflow: visible;
+}
+.dark-mode-icon {
+    width: 25px;
+    height: 25px;
+    transform: scale(1.25);
+    stroke-width: 1.85;
+    stroke: $grey;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
 
 //hello section
 .helloSection {
@@ -127,9 +157,9 @@ header {
 .catg {
     @include showAll();
     @include noScrollBar();
+    overflow: hidden;
 
     &_scroll {
-        width: 121%;
         overflow: scroll;
         scrollbar-width: none;
 
@@ -161,7 +191,14 @@ header {
             margin-bottom: 25px;
             font-size: 25px;
         }
+
+        &:last-child {
+            margin-right: 5px
+        }
     }
+
+
+
 }
 
 //tasks section
@@ -172,13 +209,13 @@ header {
         height: 230px;
         overflow-y: scroll;
         @include noScrollBar();
-
+        @include hoverPointer();
 
         &__field {
             display: flex;
             padding: 15px;
             margin-bottom: 10px;
-
+            align-items: center;
             &:last-child {
                 margin-bottom: 0;
             }
@@ -203,6 +240,60 @@ header {
         }
     }
 }
+
+//new task button
+.newTaskBtn {
+
+    border: none;
+    background: $brightBlue;
+    position: fixed;
+    bottom: 55px;
+    right: 40px;
+    width: 60px;
+    height: 60px;
+    border-radius: 300px;
+    @include flexCenter();
+    @include scale();
+    @include hoverPointer();
+
+    &::before {
+        content: '';
+        position: absolute;
+        bottom: 1px;
+        width: 30px;
+        height: 30px;
+        transition: .1s;
+    }
+
+    &:hover {
+        &::before {
+            border-radius: 300px;
+            box-shadow: 0px 3px 30px $brightBlue;
+        }
+    }
+
+
+    div {
+        width: 20px;
+        height: 3px;
+        border-radius: 20px;
+        background: white;
+        position: relative;
+
+        &::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            width: 20px;
+            height: 3px;
+            border-radius: 20px;
+            transform: rotate(90deg);
+            background: white;
+        }
+
+    }
+
+ }
 
 
 @include biggerScreens {

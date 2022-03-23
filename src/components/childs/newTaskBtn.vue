@@ -1,7 +1,10 @@
 <template>
-    <button>
-        <img src="" alt="" />
+    <button class="newTaskBtn">
+        <div>
+        </div>
     </button>
+
+
 </template>
 
 <script>

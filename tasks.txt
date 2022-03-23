@@ -1,0 +1,1 @@
+make side bar close when main appFrame is tapped
