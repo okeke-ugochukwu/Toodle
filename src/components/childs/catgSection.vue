@@ -2,6 +2,7 @@
     <section class="catg">
         <div class="catg_title sec_title">
             <h4>
+
                 CATEGORIES
             </h4>
         </div>
@@ -10,7 +11,11 @@
             <div class="catg_slide">
 
                 <!-- Object.entries makes array out of tasks data -->
-                <div class="catg_card"  v-for="dataObject in Object.entries(this.tasksData)" :key="dataObject.id">
+                <div class="catg_card"
+                 v-for="dataObject in Object.entries(this.tasksData)" :key="dataObject.id"
+                 @click="selectCatgory([].concat.apply([], Object.values(dataObject[1])))"
+                >
+
                     <div class="catg_card__tskNum" >
                         <!--
                             Target array member that's actual tasks data,
@@ -19,17 +24,24 @@
                             At this point only individual tasks (objects) remain in the array. No nested arrays
                             Now get number of these tasks and display
                          -->
-                        {{ [].concat.apply([], Object.values((dataObject)[1])).length }} tasks
+                        {{ [].concat.apply([], Object.values(dataObject[1])).length }} tasks
                     </div>
+
 
                     <div class="catg_card__tskDescr">
                         <h5 class="mainHeadings">
                             All tasks
                         </h5>
                     </div>
+
                 </div>
 
-                <div class="catg_card" v-for="taskCategory in Object.entries(this.tasksData[0])" :key="taskCategory.ID">
+
+                <div class="catg_card"
+                 v-for="taskCategory in Object.entries(this.tasksData[0])" :key="taskCategory.id"
+                 @click="selectCatgory([].concat.apply([], Object.values(taskCategory)[1]))"
+                >
+
                     <div class="catg_card__tskNum">
                         {{  taskCategory[1].length  }} tasks
                     </div>
@@ -40,6 +52,7 @@
                            {{ taskCategory[0][0].toUpperCase() + taskCategory[0].substring(1) }}
                         </h5>
                     </div>
+
                 </div>
 
             </div>
@@ -55,7 +68,9 @@
             return {
                 sumOfTasks: 0,
 
-                sumOfTasksCategory: 0
+                sumOfTasksCategory: 0,
+
+                selectedCatg: ''
             }
         },
 
@@ -67,34 +82,18 @@
         },
 
         created() {
-            // this.sumUpTasks();
-
-            // this.sumTasksCategorically();
+            // this.sendSelectedCatgToParent();
         },
 
         methods: {
-            // sumUpTasks() {
-            //     let tasksCounter = 0;
-
-            //     Object.entries(this.tasksData[0]).forEach((taskCategory) => {
-            //         //  alert(taskCategory);
-
-            //         //  alert(tasksCounter);
-
-            //         Object.values(taskCategory[1]).forEach(task => {
-            //             tasksCounter++;
-            //             console.log(task)
-            //         });
-
-
-            //     });
-            //         this.sumOfTasks = tasksCounter;
+            // sendSelectedCatgToParent() {
+            //     this.$emit("recieveSelectedCatgData", this.selectedCatg)
             // },
 
-
-            // sumTasksCategorically() {
-            //     this.sumOfTasksCategory = Object.values(this.tasksData[0])
-            // }
+            selectCatgory(selectedCategory) {
+                this.selectedCatg = selectedCategory
+                this.$emit("recieveSelectedCatgData", this.selectedCatg)
+            }
         },
     }
 
