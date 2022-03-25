@@ -1,6 +1,7 @@
 <template>
     <section
     class="tasks"
+    v-if="this.selectedCatgData"
     >
         <div class="tasks_title sec_title">
             <h4>
@@ -8,26 +9,31 @@
             </h4>
         </div>
 
+
+
         <div class="tasks_bars">
+
             <!--
                 Explaination of this v-for logic is in 'catgSection' component
                 [].concat.apply([], Object.values(this.allTasks[0]))
              -->
+git 
             <div
                 class="tasks_bars__field"
                 v-for="task in this.selectedCatgData" :key="task.id"
+                @click="checkTask(task)"
              >
 
-                    {{}}
-                <label class="checkBox" for="checkBox">
+                <label class="checkBox" for="">
                     <input type="checkbox" name="checkBox" id="checkBox" v-model="task.status"/>
                 </label>
-
-
 
                 <div class="checkText" :class="{completed: task.status}">
                     {{task.descr}}
                 </div>
+
+
+
             </div>
         </div>
 
@@ -43,12 +49,15 @@ export default {
     data() {
         return {
 
+            allTasks: undefined
 
         }
     },
 
     created () {
-        this.sendDataToParent();
+
+        this.setAllTasks();
+
     },
 
     props: {
@@ -58,14 +67,36 @@ export default {
         },
         selectedCatgData: {
             type: Array,
-            default: () => []
+            default: undefined
         },
     },
 
     methods: {
-        sendDataToParent() {
 
+         setAllTasks() {
+            this.allTasks = this.selectedCatgData
         },
+
+        checkTask(task) {
+            switch (task.status) {
+                case false:
+                        task.status = true;
+                    break;
+
+                case true:
+                        task.status = false;
+                    break;
+
+                default:
+                    break;
+            }
+
+            this.sendUncompletedTasks()
+        },
+
+        sendUncompletedTasks() {
+            this.$emit("recieveChangedData", this.selectedCatgData)
+        }
     },
 }
 </script>

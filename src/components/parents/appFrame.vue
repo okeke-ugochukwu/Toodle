@@ -11,19 +11,22 @@
 
     <mobileHeader  @sideBarCall = "showSideBar()" />
 
+  {{alteredSelectedCatgData}}
 
     <helloSection />
 
     <catgSection
       :tasksData = "allTasks"
+      :newAllTasksData = "newTasks"
       @recieveSelectedCatgData = "setSelectedCatg"
     />
 
     <taskSection
       :tasksData = "allTasks"
       :selectedCatgData = "selectedCatg"
+      @recieveChangedData = "setChange"
     />
-
+    {{alteredSelectedCatgData}}
     <newTaskBtn />
   </div>
 </template>
@@ -57,6 +60,9 @@ export default {
       allTasksProgressColor: '#0669FF',
 
       selectedCatg: [],
+
+      alteredSelectedCatgData: undefined,
+
       //Each task is an object, placed in its parent (task category) which an array
       //of all tasks of the same type.
 
@@ -127,7 +133,7 @@ export default {
                       {
                           id: 80,
                           type: 'miscellaneous',
-                          descr: 'Get a external monitor',
+                          descr: 'Get an external monitor',
                           status: false,
                       },
 
@@ -153,9 +159,16 @@ export default {
                       }
                   ],
               }
-      ]
+      ],
+
+      //same as 'allTasks', just without the grouping(categories)
+      newAllTasksData: ''
 
     }
+  },
+
+  created () {
+    this.createNewAllTasksData();
   },
 
   methods: {
@@ -184,6 +197,14 @@ export default {
 
     setSelectedCatg(dataRecieved) {
       this.selectedCatg = dataRecieved
+    },
+
+    setChange(dataReceived) {
+      this.alteredSelectedCatgData = dataReceived;
+    },
+
+    createNewAllTasksData() {
+      this.newAllTasksData = [].concat.apply([], Object.values(this.allTasks[0]))
     }
 
 

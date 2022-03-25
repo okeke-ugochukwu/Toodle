@@ -2,7 +2,6 @@
     <section class="catg">
         <div class="catg_title sec_title">
             <h4>
-
                 CATEGORIES
             </h4>
         </div>
@@ -12,9 +11,10 @@
 
                 <!-- Object.entries makes array out of tasks data -->
                 <div class="catg_card"
-                 v-for="dataObject in Object.entries(this.tasksData)" :key="dataObject.id"
-                 @click="selectCatgory([].concat.apply([], Object.values(dataObject[1])))"
+                 @click="selectCatgory(this.newTasksData)"
+
                 >
+
 
                     <div class="catg_card__tskNum" >
                         <!--
@@ -24,7 +24,7 @@
                             At this point only individual tasks (objects) remain in the array. No nested arrays
                             Now get number of these tasks and display
                          -->
-                        {{ [].concat.apply([], Object.values(dataObject[1])).length }} tasks
+                        {{ this.newTasksData.length }} tasks
                     </div>
 
 
@@ -33,6 +33,10 @@
                             All tasks
                         </h5>
                     </div>
+
+                    <progress max="100" value="80">
+
+                    </progress>
 
                 </div>
 
@@ -61,16 +65,19 @@
 </template>
 
 <script>
+
+     var percCompleted = 80;
     export default {
         name: 'catgSection',
 
         data() {
             return {
-                sumOfTasks: 0,
 
-                sumOfTasksCategory: 0,
+                selectedCatg: '',
 
-                selectedCatg: ''
+                newTasksData: '', //Same as 'allTasks' in props except this has been stripped of groupings (categories)
+
+                completedTasks: 0
             }
         },
 
@@ -82,7 +89,15 @@
         },
 
         created() {
-            // this.sendSelectedCatgToParent();
+            this.setNewTasksData()
+            this.countCompletedTasks()
+
+        },
+
+        computed: {
+            completedTasksPercentage() {
+                return percCompleted
+            }
         },
 
         methods: {
@@ -93,7 +108,24 @@
             selectCatgory(selectedCategory) {
                 this.selectedCatg = selectedCategory
                 this.$emit("recieveSelectedCatgData", this.selectedCatg)
-            }
+            },
+
+            setNewTasksData() {
+                this.newTasksData = [].concat.apply([], Object.values(this.tasksData[0]))
+            },
+
+            countCompletedTasks() {
+
+                var counter = 0;
+                this.newTasksData.forEach(task => {
+
+                        if(task.status == false) {
+                            counter++;
+                            this.completedTasks = counter
+                        }
+                });
+            },
+
         },
     }
 
