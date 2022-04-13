@@ -1,7 +1,7 @@
 <template>
     <section
     class="tasks"
-    v-if="this.selectedCatgData"
+    v-if="selectedCatg"
     >
         <div class="tasks_title sec_title">
             <h4>
@@ -9,18 +9,14 @@
             </h4>
         </div>
 
-
-
         <div class="tasks_bars">
-
             <!--
                 Explaination of this v-for logic is in 'catgSection' component
                 [].concat.apply([], Object.values(this.allTasks[0]))
              -->
-git 
             <div
                 class="tasks_bars__field"
-                v-for="task in this.selectedCatgData" :key="task.id"
+                v-for="task in this.filteredTasks" :key="task.id"
                 @click="checkTask(task)"
              >
 
@@ -32,51 +28,34 @@ git
                     {{task.descr}}
                 </div>
 
-
-
             </div>
         </div>
-
-
 
     </section>
 </template>
 
 <script>
+import filterTasks from './modules/filter-tasks';
+
 export default {
     name: 'taskSection',
 
-    data() {
-        return {
-
-            allTasks: undefined
-
-        }
-    },
-
-    created () {
-
-        this.setAllTasks();
-
-    },
-
-    props: {
-        tasksData: {
-                type: Array,
-                default: () => [],
+     computed: {
+            tasks() {
+                return this.$store.state.allTasks
+            },
+            tasksNoCatgs(){
+                return this.$store.getters.allTasksNoCatgs
+            },
+            selectedCatg() {
+              return this.$store.state.selectedCatg;
+            },
+            filteredTasks() {
+                return filterTasks(this.selectedCatg, this.tasksNoCatgs);
+            }
         },
-        selectedCatgData: {
-            type: Array,
-            default: undefined
-        },
-    },
 
     methods: {
-
-         setAllTasks() {
-            this.allTasks = this.selectedCatgData
-        },
-
         checkTask(task) {
             switch (task.status) {
                 case false:
@@ -91,12 +70,8 @@ export default {
                     break;
             }
 
-            this.sendUncompletedTasks()
+            this.$store.commit('updateAllTasks', this.tasks)
         },
-
-        sendUncompletedTasks() {
-            this.$emit("recieveChangedData", this.selectedCatgData)
-        }
     },
 }
 </script>

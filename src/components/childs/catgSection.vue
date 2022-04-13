@@ -11,12 +11,11 @@
 
                 <!-- Object.entries makes array out of tasks data -->
                 <div class="catg_card"
-                 @click="selectCatgory(this.newTasksData)"
-
+                 @click="sendCatgoryFilter('all')"
                 >
 
 
-                    <div class="catg_card__tskNum" >
+                    <div class="catg_card__tskNum">
                         <!--
                             Target array member that's actual tasks data,
                             Get the all  key pair values (arrays) which are the actual tasks (grouped), make an array out of these arrays
@@ -24,7 +23,7 @@
                             At this point only individual tasks (objects) remain in the array. No nested arrays
                             Now get number of these tasks and display
                          -->
-                        {{ this.newTasksData.length }} tasks
+                        {{ this.tasksNoCatgs.length }} tasks
                     </div>
 
 
@@ -34,17 +33,18 @@
                         </h5>
                     </div>
 
-                    <progress max="100" value="80">
-
-                    </progress>
+                    <progressBar
+                        :newTasksData = "newTasksData"
+                        :alteredSelectedData = "alteredSelectedCatgData"
+                    />
 
                 </div>
 
-
                 <div class="catg_card"
-                 v-for="taskCategory in Object.entries(this.tasksData[0])" :key="taskCategory.id"
-                 @click="selectCatgory([].concat.apply([], Object.values(taskCategory)[1]))"
-                >
+                    v-for="taskCategory in this.tasks" :key="taskCategory.id"
+                    ref="taskCategories"
+                    @click="sendCatgoryFilter(taskCategory[0])"
+                 >
 
                     <div class="catg_card__tskNum">
                         {{  taskCategory[1].length  }} tasks
@@ -61,71 +61,56 @@
 
             </div>
         </div>
+
+
     </section>
+
+
 </template>
 
 <script>
 
-     var percCompleted = 80;
+    import progressBar from '../childs/progressBar.vue';
+
+
     export default {
         name: 'catgSection',
+
+        components: {
+            progressBar
+        },
 
         data() {
             return {
 
-                selectedCatg: '',
-
-                newTasksData: '', //Same as 'allTasks' in props except this has been stripped of groupings (categories)
-
-                completedTasks: 0
             }
         },
 
         props: {
-            tasksData: {
-                type: Array,
-                default: () => [],
-            },
-        },
-
-        created() {
-            this.setNewTasksData()
-            this.countCompletedTasks()
 
         },
 
         computed: {
-            completedTasksPercentage() {
-                return percCompleted
+            tasks() {
+                return  Object.entries(this.$store.state.allTasks[0])
+            },
+            tasksNoCatgs(){
+                return this.$store.getters.allTasksNoCatgs;
             }
         },
 
+        created() {
+
+        },
+
+        mounted() {
+            // this.taskCategories = this.$refs.taskCategories
+        },
+
         methods: {
-            // sendSelectedCatgToParent() {
-            //     this.$emit("recieveSelectedCatgData", this.selectedCatg)
-            // },
-
-            selectCatgory(selectedCategory) {
-                this.selectedCatg = selectedCategory
-                this.$emit("recieveSelectedCatgData", this.selectedCatg)
+            sendCatgoryFilter(selectedCategory) {
+                this.$store.commit('setselectedCatgFilter', selectedCategory)
             },
-
-            setNewTasksData() {
-                this.newTasksData = [].concat.apply([], Object.values(this.tasksData[0]))
-            },
-
-            countCompletedTasks() {
-
-                var counter = 0;
-                this.newTasksData.forEach(task => {
-
-                        if(task.status == false) {
-                            counter++;
-                            this.completedTasks = counter
-                        }
-                });
-            },
-
         },
     }
 
