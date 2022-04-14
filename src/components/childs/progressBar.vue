@@ -1,34 +1,38 @@
-
 <template>
     <progress max="100" :value="percentageComplete">
 
     </progress>
 
-    <!-- {{completedTasks}} -->
-    <!-- {{uncompletedTasks}} -->
-    <!-- {{percentageComplete}} -->
+    <!-- {{tasks}} -->
 </template>
 
 <script>
-
     export default {
+
         name: 'progressBar',
 
         data() {
             return {
-                uncompletedTasks: undefined,
-                temp: null
+                uncompletedTasks: null
             }
         },
+
+        props: {
+            tasksInView: {
+                type: Array,
+                default: () => []
+            },
+        },
+
         computed: {
             tasks() {
-                return this.$store.getters.allTasksNoCatgs
+                return [].concat.apply([], Object.values(this.tasksInView[1]));
             },
-            numberOfTasks(){
-                return this.tasks.length;
+            numberOfTasks() {
+              return  this.tasks.length;
             },
             completedTasks() {
-                return this.numberOfTasks - this.uncompletedTasks
+                return this.numberOfTasks - this.uncompletedTasks;
             },
             percentageComplete() {
                 return Math.ceil((this.completedTasks / this.numberOfTasks) * 100)
@@ -37,13 +41,14 @@
 
         watch: {
             tasks: {
-                handler(newTasksList, oldTasksList) {
-                    this.countUncompletedTasks(newTasksList);
-                    console.log(oldTasksList);
+                handler(newTasksList) {
+                    this.countUncompletedTasks(newTasksList)
                 },
+
                 deep: true,
                 immediate: true,
             }
+
         },
 
         methods: {
@@ -52,38 +57,28 @@
 
                 tasksList.forEach(task => {
 
-                        if (task.status === false ) {
-                            ++tasksCounter;
-                            this.uncompletedTasks = tasksCounter ;
-                        }
+                    if (task.status === false ) {
+                        ++tasksCounter;
+                        this.uncompletedTasks = tasksCounter ;
+                    }
 
-                        // the counter cannot get to zero because at the toggle of the last uncompleted..
-                        //task, there's is not more uncompleted task to count,which means there's nore 'task.status' that is..
-                        //still false; so therefore no more increment
-                        //so the increment is implemented manually in the else statement below
+                    else {
+                        tasksCounter + 1
+                        this.uncompletedTasks = tasksCounter ;
+                    }
 
-                        else {
-                            tasksCounter + 1
-                            this.uncompletedTasks = tasksCounter ;
-                        }
                 });
-            },
 
-            wuruwuru() {
-                console.log("asaadasda")
             }
-
-        },
+        }
     }
 </script>
 
 <style lang="scss" scoped>
-
     progress {
-        width: 100%;
-        background: #dfe4f4;
-        height: 6px;
-        // transition: 5s;
-    }
-
+            width: 100%;
+            background: #dfe4f4;
+            height: 6px;
+            // transition: 5s;
+        }
 </style>

@@ -99,6 +99,8 @@ const store = createStore({
             }
       ],
       selectedCatg: null,
+
+      percentageComplete: null
     }
   },
 
@@ -109,6 +111,10 @@ const store = createStore({
 
     updateAllTasks(state, tasks) {
         state.allTasks = tasks
+    },
+    
+    setPercentageComplete(state, percentageRecieved) {
+        state.percentageComplete = percentageRecieved
     }
   },
 

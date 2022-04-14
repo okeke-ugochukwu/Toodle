@@ -6,6 +6,8 @@
             </h4>
         </div>
 
+        <!-- {{tasksCategory}} -->
+
 
         <div class="catg_scroll">
             <div class="catg_slide">
@@ -14,7 +16,6 @@
                 <div class="catg_card"
                  @click="sendCatgoryFilter('all')"
                 >
-
 
                     <div class="catg_card__tskNum">
                         <!--
@@ -34,17 +35,15 @@
                         </h5>
                     </div>
 
-                    <progressBar
-
-
-                    />
+                    <progressBarAll/>
 
                 </div>
+
 
                 <div class="catg_card"
                     v-for="taskCategory in this.tasks" :key="taskCategory.id"
                     ref="taskCategories"
-                    @click="sendCatgoryFilter(taskCategory[0])"
+                    @click="sendCatgoryFilter(taskCategory[0], taskCategory)"
                  >
 
                     <div class="catg_card__tskNum">
@@ -58,6 +57,10 @@
                         </h5>
                     </div>
 
+                    <progressBar
+                        :tasksInView = taskCategory
+                     />
+
                 </div>
 
             </div>
@@ -70,19 +73,21 @@
 
 <script>
 
-    import progressBar from '../childs/progressBar.vue';
+    import progressBarAll from './progressBarAll.vue';
+    import progressBar from './progressBar.vue';
 
 
     export default {
         name: 'catgSection',
 
         components: {
+            progressBarAll,
             progressBar
         },
 
         data() {
             return {
-
+                tasksCategory: document.get
             }
         },
 
@@ -100,7 +105,7 @@
         },
 
         created() {
-
+            this.setTasksCategory();
         },
 
         mounted() {
@@ -108,8 +113,14 @@
         },
 
         methods: {
-            sendCatgoryFilter(selectedCategory) {
+            sendCatgoryFilter(selectedCategory, tasksCategory) {
                 this.$store.commit('setselectedCatgFilter', selectedCategory)
+
+                this.setTasksCategory(tasksCategory)
+            },
+
+            setTasksCategory(tasksCategory) {
+                this.tasksCategory = tasksCategory
             },
         },
     }

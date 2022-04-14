@@ -9,6 +9,7 @@
             </h4>
         </div>
 
+
         <div class="tasks_bars">
             <!--
                 Explaination of this v-for logic is in 'catgSection' component
