@@ -90,6 +90,12 @@ const store = createStore({
                         status: false,
                     }
                 ],
+
+                // 'HelpObject': [
+                //     {
+                //         status: false,
+                //     }
+                // ]
             }
       ],
       selectedCatg: null,
@@ -109,7 +115,7 @@ const store = createStore({
   getters: {
     allTasksNoCatgs(state) {
         return [].concat.apply([], Object.values(state.allTasks[0]));
-    }
+    },
   }
 });
 

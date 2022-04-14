@@ -6,6 +6,7 @@
             </h4>
         </div>
 
+
         <div class="catg_scroll">
             <div class="catg_slide">
 
@@ -34,8 +35,8 @@
                     </div>
 
                     <progressBar
-                        :newTasksData = "newTasksData"
-                        :alteredSelectedData = "alteredSelectedCatgData"
+
+
                     />
 
                 </div>
@@ -61,7 +62,6 @@
 
             </div>
         </div>
-
 
     </section>
 
