@@ -9,7 +9,7 @@
     justify-content: center;
 }
 @mixin showAll {
-    * {
+    *{
         outline: 1px solid black;
     }
 
@@ -55,6 +55,10 @@ h4 {
     color: $grey;
     width: max-content;
 }
+button, select, option, input {
+    font-family: 'Montserrat', sans-serif;
+
+}
 .mainHeadings {
     color: $darkBlue;
 }
@@ -91,10 +95,13 @@ section {
     height: 100%;
     position: absolute;
     display: flex;
-    align-items: center;
     padding-left: 50px;
     color: $white;
+    padding-top: 65px;
 
+    .close_btn {
+        margin-left: 90px;
+    }
 }
 
 // header section
@@ -113,38 +120,33 @@ header {
     &:hover {
         cursor: pointer;
     }
-
-    .ham-line {
-            width: 30px;
-            height: 3px;
-            border-radius: 20px;
-            background: $grey;
-
-        &::before {
-            content: '';
-            position: absolute;
-            margin-top: 12px;
-            width: 30px;
-            height: 3px;
-            border-radius: 30px;
-            background: $grey;
-        }
-    }
 }
 .colorSwitch {
     width: max-content;
     @include hoverPointer();
     overflow: visible;
 }
-.dark-mode-icon {
-    width: 25px;
-    height: 25px;
-    transform: scale(1.25);
-    stroke-width: 1.85;
+.header-icons {
     stroke: $grey;
     fill: none;
     stroke-linecap: round;
     stroke-linejoin: round;
+}
+.menu-icon {
+    stroke-width: 2;
+    transform: scale(1.5);
+}
+.dark-mode-icon {
+    transform: scale(1.25);
+    stroke-width: 1.85;
+}
+.icons {
+    color: white;
+    stroke-width: 2.2;
+    transform: scale(1.2);
+}
+.chevron-left-icon {
+
 }
 
 //hello section
@@ -171,7 +173,7 @@ header {
 
     &_card {
         width: 220px;
-        padding: 15px;
+        padding: 35px 15px 15px;
         margin-right: 20px;
 
         &__tskNum {
@@ -203,23 +205,65 @@ header {
 
 //tasks section
 .tasks {
-    @include showAll();
 
     &_bars {
         height: 230px;
-        overflow-y: scroll;
+        overflow-y: visible;
         @include noScrollBar();
+    // @include showAll();
+
 
         &__field {
-            display: flex;
             padding: 15px;
+            // background: red;
             margin-bottom: 10px;
             align-items: center;
+            position: relative;
+            border-radius: 20px;
             @include hoverPointer();
-            @include scale();
 
             &:last-child {
                 margin-bottom: 0;
+            }
+
+            & > div:first-child {
+                display: flex;
+                justify-content: space-between;
+                // display: none;
+
+                & > div {
+                    &:nth-child(2) {
+                        width: 75%;
+                        line-height: 1.3em;
+                    }
+
+                    &:nth-child(3) {
+                        // display: flex;
+                        // position: absolute;
+                        // right: 15px;
+                        // top: 15px;
+                    }
+                }
+            }
+
+            & > div:nth-child(2) {
+                @include flexCenter();
+                justify-content: space-between;
+            }
+
+            .header-icons {
+                transform: scale(0.9);
+                stroke-width: 1.5;
+                @include scale();
+            }
+
+            input {
+                font-family: 'Montserrat', sans-serif;
+                font-size: 14px;
+                width: 100%;
+                padding: 5px;
+                border: none;
+                border-bottom: 2px solid black;
             }
         }
 
@@ -295,6 +339,167 @@ header {
 
     }
 
+ }
+
+
+ //new task modal
+ .newTaskModal {
+    position: absolute;
+    top: 0;
+    z-index: 2;
+    width: 100%;
+    max-width: 450px;
+    margin: auto;
+    height: 100%;
+    padding: 55px 40px;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    & > div {
+        &:nth-child(odd) {
+            width: max-content;
+            align-self: end;
+        }
+
+        &:nth-child(2) {
+            position: relative;
+
+            input {
+                z-index: -2;
+                width: 100%;
+                padding: 10px 0;
+                font-weight: 500;
+                border: none;
+                color: $desaturatedBlue;
+
+                &[type=submit] {
+                    display: none;
+                }
+
+                &:focus {
+                    transform: scale(1.06);
+                }
+            }
+            input, select, option {
+                font-size: 17px;
+            }
+
+            & > div:nth-child(4) {
+                width: 100%;
+                height: 35vh;
+                // background: blueviolet;
+                margin-top: 5px;
+
+                select {
+                    width: 100%;
+                    padding: 15px;
+                    // background: $brightBlue;
+                    // color: white;
+                    border-radius: 10px;
+                    border: none;
+                    @include hoverPointer();
+                }
+
+                option {
+                    // background: $white;
+                    // color: $grey;
+                    border: none;
+                    padding: 15px;
+                    @include hoverPointer();
+                }
+            }
+            .error_message {
+                font-size: 14px;
+                color: white;
+                background: $brightBlue;
+                border: 2px solid $brightBlue;
+                border-radius: 20px;
+                width: max-content;
+                padding: 8px 17px;
+                position: absolute;
+                top: -45px;
+                left: 30px;
+                z-index: 4;
+
+                &::after {
+                    content: '';
+                    height: 8px;
+                    width: 8px;
+                    position: absolute;
+                    z-index: -1;
+                    left: 30px;
+                    top: 18px;
+                    color: white;
+                    border-radius: 4px;
+                    border-bottom: 15px solid $brightBlue;
+                    border-left: 15px solid $brightBlue;
+                    transform: rotate(-45deg);
+                }
+            }
+        }
+
+        &:nth-child(3) {
+            button {
+                padding: 15px 30px;
+                border: none;
+                color: white;
+                background: $brightBlue;
+                border-radius: 100px;
+                letter-spacing: .1em;
+                position: relative;
+                font-size: 13px;
+                font-weight: 400;
+                @include flexCenter();
+                @include scale();
+                @include hoverPointer();
+
+                &::before {
+                    content: ' ';
+                    position: absolute;
+                    padding: 12px 45px;
+                    transition: .3s;
+                }
+
+                &:hover {
+                    &::before {
+                        box-shadow: 0px 10px 30px $brightBlue;
+                    }
+                }
+            }
+        }
+    }
+ }
+ .close_btn {
+     width: 50px;
+     height: 50px;
+     border: 3.15px solid #9caad388;
+     background: transparent;
+     border-radius: 100%;
+     @include hoverPointer();
+ }
+ .modal_close_btn {
+    position: relative;
+    @include flexCenter();
+
+    .ham-line {
+        width: 20px;
+        height: 3.2px;
+        border-radius: 20px;
+        background: $desaturatedBlue;
+        position: absolute;
+
+        &:first-child {
+            transform: rotate(135deg);
+        }
+        &:nth-child(2) {
+            transform: rotate(-135deg);
+        }
+    }
+ }
+ .modalOpen {
+     display: flex;
  }
 
 

@@ -1,14 +1,23 @@
 <template>
-    <button class="newTaskBtn">
-        <div>
-        </div>
-    </button>
 
+    <button
+        class="newTaskBtn"
+        @click="toggleModalStatus()"
+    >
+
+        <plus-icon class="icons"/>
+    </button>
 
 </template>
 
 <script>
-export default {
-    name: 'newTaskBtn'
-}
+    export default {
+        name: 'newTaskBtn',
+
+        methods: {
+            toggleModalStatus() {
+                this.$store.commit('toggleModal');
+            }
+        }
+    }
 </script>

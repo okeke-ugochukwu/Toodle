@@ -6,7 +6,7 @@ function filterTasks(selectedCatg, allTasks) {
         return allTasks;
     }
 
-    return allTasks.filter((t) => t.type === selectedCatg );
+    return allTasks.filter((t) => t.category === selectedCatg );
 }
 
 export default  filterTasks

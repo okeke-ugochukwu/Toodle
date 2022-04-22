@@ -1,17 +1,16 @@
 <template>
   <header>
     <div
-    class="hamburger"
-    @click="callSideBarEvent()"
+      class="hamburger"
+      @click="toggleSideBarStatus"
     >
-      <div class="ham-line"></div>
+      <menu-icon class="header-icons menu-icon"/>
     </div>
 
     <div class="colorSwitch">
-
-      <bold-icon />
-
+      <moon-stars-icon class="header-icons dark-mode-icon"/>
     </div>
+
   </header>
 </template>
 
@@ -26,12 +25,10 @@
     },
 
     methods: {
-      callSideBarEvent() {
+      toggleSideBarStatus() {
+        this.$store.commit('toggleSideBar');
+      }
+    }
 
-          // send an event name to parent
-          //  call is recievd in child component tag in parent
-          this.$emit('sideBarCall');
-      },
-    },
   };
 </script>

@@ -1,30 +1,19 @@
 <template>
-
-  <!--
-    'sideBarShown' is the class bound to
-    'sideBarStatus' is the boolean data value that toggles the class
-   -->
   <div
   class="appFrame"
   :class="{ sideBarShown: sideBarStatus }"
   >
 
-    <mobileHeader  @sideBarCall = "showSideBar()" />
-
+    <mobileHeader />
 
     <helloSection />
 
-    <catgSection
+    <catgSection />
 
-    />
-
-    <taskSection
-      :tasksData = "allTasks"
-      :selectedCatgData = "selectedCatg"
-      @recieveChangedData = "setChange"
-    />
+    <taskSection />
 
     <newTaskBtn />
+
   </div>
 </template>
 
@@ -49,14 +38,16 @@
 
       data() {
         return {
-          sideBarStatus: false,
-
           username: 'User',
 
         }
       },
 
       computed: {
+        sideBarStatus() {
+          return this.$store.state.sideBarStatus
+        },
+
         allTasks() {
           return this.$store.state.allTasks;
         },

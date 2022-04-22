@@ -1,10 +1,11 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import store from './store';
-import Icons from './tabler-icons'
+import VueTablerIcons from "vue-tabler-icons";
+// import tablerIconsPlugin  from './plugins/install-tabler-icons';
 
 
 createApp(App)
     .use(store)
-    .use(Icons)
+    .use(VueTablerIcons)
     .mount('#app');

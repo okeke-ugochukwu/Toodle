@@ -1,5 +1,8 @@
 <template>
-    <section class="catg">
+    <section
+        class="catg"
+        v-if="tasks"
+    >
         <div class="catg_title sec_title">
             <h4>
                 CATEGORIES
@@ -14,7 +17,7 @@
 
                 <!-- Object.entries makes array out of tasks data -->
                 <div class="catg_card"
-                 @click="sendCatgoryFilter('all')"
+                 @click="sendCatgoryFilter('all', this.tasksNoCatgs)"
                 >
 
                     <div class="catg_card__tskNum">
@@ -41,11 +44,11 @@
 
 
                 <div class="catg_card"
-                    v-for="taskCategory in this.tasks" :key="taskCategory.id"
+                    v-for="taskCategory in Object.entries(this.tasks)" :key="taskCategory.id"
                     ref="taskCategories"
                     @click="sendCatgoryFilter(taskCategory[0], taskCategory)"
-                 >
-
+                >
+                    <!-- {{taskCategory}} -->
                     <div class="catg_card__tskNum">
                         {{  taskCategory[1].length  }} tasks
                     </div>
@@ -53,19 +56,18 @@
                     <div class="catg_card__tskDescr">
                         <h5 class="mainHeadings">
                             <!-- get object array being iterated through, get First character, change case and add to string -->
-                           {{ taskCategory[0][0].toUpperCase() + taskCategory[0].substring(1) }}
+                           {{ taskCategory[0][0].toUpperCase() + taskCategory[0].substring(1).toLowerCase() }}
                         </h5>
                     </div>
 
                     <progressBar
                         :tasksInView = taskCategory
-                     />
+                    />
 
                 </div>
 
             </div>
         </div>
-
     </section>
 
 
@@ -87,7 +89,7 @@
 
         data() {
             return {
-                tasksCategory: document.get
+                taskCategory: null
             }
         },
 
@@ -97,30 +99,22 @@
 
         computed: {
             tasks() {
-                return  Object.entries(this.$store.state.allTasks[0])
+                return this.$store.state.allTasksContainer.allTasks
             },
             tasksNoCatgs(){
                 return this.$store.getters.allTasksNoCatgs;
             }
         },
 
-        created() {
-            this.setTasksCategory();
-        },
-
-        mounted() {
-            // this.taskCategories = this.$refs.taskCategories
-        },
-
         methods: {
-            sendCatgoryFilter(selectedCategory, tasksCategory) {
-                this.$store.commit('setselectedCatgFilter', selectedCategory)
+            sendCatgoryFilter(selectedCategory, taskCategory) {
+                this.$store.commit('setselectedCatgFilter', selectedCategory);
 
-                this.setTasksCategory(tasksCategory)
+                this.setTasksCategory(taskCategory);
             },
 
-            setTasksCategory(tasksCategory) {
-                this.tasksCategory = tasksCategory
+            setTasksCategory(taskCategory) {
+                this.taskCategory = taskCategory
             },
         },
     }

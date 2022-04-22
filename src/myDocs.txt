@@ -1,0 +1,15 @@
+#Ref-101
+    Vue's reactivity system does not detect changes to objects
+        UNLESS the object is initialized with a property and ONLY THAT PROPERTY  is reactive!
+        --------------
+        For changes to that property to be detected:
+        - a fresh object is created with the same property name as the original
+        - the property is assigned a value
+        - the new object is now used to replace the original object
+        -------------
+        By using this method, Vue is able to detect a change to the original property
+
+
+
+#Edit-101
+    Edit tasks section
