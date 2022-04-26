@@ -12,7 +12,7 @@
 <script>
 
     export default {
-        name: 'progressBarAll',
+        name: 'progressBarUncompleted',
 
         data() {
             return {
@@ -28,10 +28,10 @@
                 return this.tasks.length;
             },
             completedTasks() {
-                return this.numberOfTasks - this.uncompletedTasks
+               return this.$store.getters.uncompletedTasks
             },
             percentageComplete() {
-                return Math.ceil((this.completedTasks / this.numberOfTasks) * 100)
+                return Math.ceil((this.uncompletedTasks / this.numberOfTasks) * 100)
             }
         },
 

@@ -9,8 +9,11 @@
         -------------
         By using this method, Vue is able to detect a change to the original property
 
+#Ref - 102'
+    Using false (boolean ) as a category filter directly affetcts the truthiness of 'selectedCatg' in store
+    So 'false' (string) is used instead
 
-
+    
 #Edit-101
     Edit tasks section
 

@@ -1,12 +1,20 @@
 function filterTasks(selectedCatg, allTasks) {
-    if(!selectedCatg) {
-        return ;
-    }
-    if(selectedCatg === "all") {
-        return allTasks;
-    }
+    switch (selectedCatg) {
+        case !selectedCatg:
+            return;
 
-    return allTasks.filter((t) => t.category === selectedCatg );
+        case "all":
+            return allTasks;
+
+        case true:
+            return allTasks.filter((t) => t.status == true );
+
+        case 'false':
+            return allTasks.filter((t) => t.status == false );
+
+        default: return allTasks.filter((t) => t.category === selectedCatg );
+
+    }
 }
 
-export default  filterTasks
+export default filterTasks;

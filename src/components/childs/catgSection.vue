@@ -41,7 +41,7 @@
 
                 <!-- Completed tasks -->
                 <div class="catg_card"
-                 @click="sendCatgoryFilter('all', this.tasksNoCatgs)"
+                 @click="sendCatgoryFilter(true, this.tasksNoCatgs)"
                 >
 
                     <div class="catg_card__tskNum">
@@ -59,9 +59,9 @@
 
                 </div>
 
-                <!--Uncompleted  tasks -->
+                <!--Uncompleted  tasks --> <!--Ref - 102 !-->
                 <div class="catg_card"
-                 @click="sendCatgoryFilter('all', this.tasksNoCatgs)"
+                 @click="sendCatgoryFilter('false', this.tasksNoCatgs)"
                 >
 
                     <div class="catg_card__tskNum">
@@ -75,7 +75,7 @@
                         </h5>
                     </div>
 
-                    <progressBarAll/>
+                    <progressBarUncompleted/>
 
                 </div>
 
@@ -111,6 +111,7 @@
 <script>
 
     import progressBarAll from './progressBarAll.vue';
+    import progressBarUncompleted from './progressBarUncmpltd.vue'
     import progressBar from './progressBar.vue';
 
 
@@ -119,6 +120,7 @@
 
         components: {
             progressBarAll,
+            progressBarUncompleted,
             progressBar
         },
 
