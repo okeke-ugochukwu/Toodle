@@ -9,13 +9,10 @@
             </h4>
         </div>
 
-        <!-- {{tasksCategory}} -->
-
-
         <div class="catg_scroll">
             <div class="catg_slide">
 
-                <!-- Object.entries makes array out of tasks data -->
+                <!-- All tasks -->
                 <div class="catg_card"
                  @click="sendCatgoryFilter('all', this.tasksNoCatgs)"
                 >
@@ -42,7 +39,47 @@
 
                 </div>
 
+                <!-- Completed tasks -->
+                <div class="catg_card"
+                 @click="sendCatgoryFilter('all', this.tasksNoCatgs)"
+                >
 
+                    <div class="catg_card__tskNum">
+                        {{this.completedTasks}} tasks
+                    </div>
+
+
+                    <div class="catg_card__tskDescr">
+                        <h5 class="mainHeadings">
+                            Completed
+                        </h5>
+                    </div>
+
+                    <progressBarAll/>
+
+                </div>
+
+                <!--Uncompleted  tasks -->
+                <div class="catg_card"
+                 @click="sendCatgoryFilter('all', this.tasksNoCatgs)"
+                >
+
+                    <div class="catg_card__tskNum">
+                        {{this.uncompletedTasks}} tasks
+                    </div>
+
+
+                    <div class="catg_card__tskDescr">
+                        <h5 class="mainHeadings">
+                            Uncompleted
+                        </h5>
+                    </div>
+
+                    <progressBarAll/>
+
+                </div>
+
+                <!-- Individual catg -->
                 <div class="catg_card"
                     v-for="taskCategory in Object.entries(this.tasks)" :key="taskCategory.id"
                     ref="taskCategories"
@@ -65,12 +102,10 @@
                     />
 
                 </div>
-
             </div>
         </div>
+
     </section>
-
-
 </template>
 
 <script>
@@ -103,6 +138,12 @@
             },
             tasksNoCatgs(){
                 return this.$store.getters.allTasksNoCatgs;
+            },
+            completedTasks(){
+                return this.$store.getters.completedTasks;
+            },
+            uncompletedTasks(){
+                return this.$store.getters.uncompletedTasks;
             }
         },
 

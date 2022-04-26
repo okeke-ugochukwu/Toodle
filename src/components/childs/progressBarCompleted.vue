@@ -1,0 +1,92 @@
+
+<template>
+    <progress max="100" :value="percentageComplete">
+
+    </progress>
+
+    <!-- {{completedTasks}} -->
+    <!-- {{uncompletedTasks}} -->
+    <!-- {{percentageComplete}} -->
+</template>
+
+<script>
+
+    export default {
+        name: 'progressBarAll',
+
+        data() {
+            return {
+                uncompletedTasks: undefined,
+                temp: null
+            }
+        },
+        computed: {
+            tasks() {
+                return this.$store.getters.allTasksNoCatgs
+            },
+            numberOfTasks(){
+                return this.tasks.length;
+            },
+            completedTasks() {
+                return this.numberOfTasks - this.uncompletedTasks
+            },
+            percentageComplete() {
+                return Math.ceil((this.completedTasks / this.numberOfTasks) * 100)
+            }
+        },
+
+        watch: {
+            tasks: {
+                handler(newTasksList) {
+                    this.countUncompletedTasks(newTasksList);
+                },
+                deep: true,
+                immediate: true,
+            },
+        },
+
+        methods: {
+            countUncompletedTasks(tasksList) {
+                var tasksCounter = 0;
+
+                tasksList.forEach(task => {
+
+                        if (task.status === false ) {
+                            ++tasksCounter;
+                            this.uncompletedTasks = tasksCounter ;
+                        }
+
+                        // the counter cannot get to zero because at the toggle of the last uncompleted..
+                        //task, there's is not more uncompleted task to count,which means there's nore 'task.status' that is..
+                        //still false; so therefore no more increment
+                        //so the increment is implemented manually in the else statement below
+
+                        else {
+                            tasksCounter + 1
+                            this.uncompletedTasks = tasksCounter ;
+                        }
+
+                });
+
+                this.sendPercentageCompleted()
+
+            },
+
+            sendPercentageCompleted() {
+                this.$store.commit('setPercentageComplete', this.percentageComplete)
+            }
+
+        },
+    }
+</script>
+
+<style lang="scss" scoped>
+
+    progress {
+        width: 100%;
+        background: #dfe4f4;
+        height: 6px;
+        // transition: 5s;
+    }
+
+</style>

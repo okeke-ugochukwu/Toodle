@@ -13,3 +13,9 @@
 
 #Edit-101
     Edit tasks section
+
+
+#DS-101
+    Each task is an object, placed in its parent (task category) which an array of all tasks of the same type.
+    All task categorises are an item in thier parent, an ojbect
+    I adopted this method to see that each task is an object, and so task categories can be named

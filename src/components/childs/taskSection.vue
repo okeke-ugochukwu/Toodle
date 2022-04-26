@@ -19,14 +19,17 @@
              -->
             <div
                 class="tasks_bars__field"
+                :class="{completed3: task.status}"
                 v-for="task in this.filteredTasks" :key="task.id"
              >
 
                 <div
                     v-if="task.editStatus == false"
+                    class="tasks_bars__field___noEdit"
+                    :class="{completed2: task.status}"
                 >
                     <label class="checkBox">
-                        <input type="checkbox" name="checkBox" id="checkBox" v-model="task.status"/>
+                        <input type="checkbox" name="checkBox" id="checkBox" @click="checkTask(task)"/>
                     </label>
 
                     <div class="checkText" :class="{completed: task.status}" @click="checkTask(task)">
@@ -45,6 +48,7 @@
                 <!-- Ref - Edit-101 -->
                 <div
                     v-if="task.editStatus"
+                    class="tasks_bars__field___edit"
                 >
                     <div>
                         <trash-icon
@@ -125,7 +129,6 @@ export default {
                     break;
             }
 
-            this.$store.commit('updateAllTasks', this.tasks)
         },
 
         verifyChange(task) {

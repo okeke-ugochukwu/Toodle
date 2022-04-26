@@ -215,7 +215,7 @@ header {
 
         &__field {
             padding: 15px;
-            // background: red;
+            border: 1px solid black;
             margin-bottom: 10px;
             align-items: center;
             position: relative;
@@ -226,27 +226,20 @@ header {
                 margin-bottom: 0;
             }
 
-            & > div:first-child {
+            &___noEdit {
                 display: flex;
+                @include flexCenter();
                 justify-content: space-between;
-                // display: none;
 
                 & > div {
                     &:nth-child(2) {
                         width: 75%;
                         line-height: 1.3em;
                     }
-
-                    &:nth-child(3) {
-                        // display: flex;
-                        // position: absolute;
-                        // right: 15px;
-                        // top: 15px;
-                    }
                 }
             }
 
-            & > div:nth-child(2) {
+            &___edit {
                 @include flexCenter();
                 justify-content: space-between;
             }
@@ -264,6 +257,7 @@ header {
                 padding: 5px;
                 border: none;
                 border-bottom: 2px solid black;
+                background: transparent;
             }
         }
 
@@ -285,6 +279,12 @@ header {
 }
 .completed {
     text-decoration: line-through;
+}
+.completed2 {
+    justify-content: unset;
+}
+.completed3 {
+    opacity: .6;
 }
 
 //new task button

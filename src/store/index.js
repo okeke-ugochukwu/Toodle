@@ -3,46 +3,8 @@ import { createStore } from 'vuex'
 
 var store = createStore({
     state() {
-        return {
-            allTasksContainer: { allTasks: {
-                'miscellaneous':  [
-                    {
-                        id: 80,
-                        category: 'miscellaneous',
-                        descr: 'Get an external monitor',
-                        status: false,
-                        editStatus: false,
-                        editButtonStatus: true
-                    },
-
-                    {
-                        id: 90,
-                        category: 'miscellaneous',
-                        descr: 'Buy mattress. 4ft * 6ft * 1ft',
-                        status: false,
-                        editStatus: false,
-                        editButtonStatus: true
-                    },
-
-                    {
-                        id: 100,
-                        category: 'miscellaneous',
-                        descr: 'Order some palletes',
-                        status: false,
-                        editStatus: false,
-                        editButtonStatus: true
-                    },
-
-                    {
-                        id: 100,
-                        category:'miscellaneous',
-                        descr: 'Order some palletes',
-                        status: false,
-                        editStatus: false,
-                        editButtonStatus: true
-                    }
-                ]
-             } },
+        return { //#DS-101, myDocs.txt
+            allTasksContainer: { allTasks: { } },
 
             selectedCatg: null,
 
@@ -138,6 +100,7 @@ var store = createStore({
                             writable: true
                         })
 
+                        break;
                     }
 
                 }
@@ -150,7 +113,7 @@ var store = createStore({
             //get the category of the task to be deleted
             var categoryToBeModified = zipContainer.taskToBeDeleted.category
 
-            //loop through the category (array) and find the task to be delected by checking the 'descr'
+            //loop through that category (array) and find the task to be delected by checking the 'descr'
             state.allTasksContainer.allTasks[categoryToBeModified].forEach(task => {
                 if (task.descr == zipContainer.taskToBeDeleted.descr) {
 
@@ -159,6 +122,11 @@ var store = createStore({
 
                     //remove the task from the array
                     state.allTasksContainer.allTasks[categoryToBeModified].splice(indexOfMatch, 1)
+
+                    //if the task removed is the last in the array (category), delete the category
+                    if (state.allTasksContainer.allTasks[categoryToBeModified].length == 0) {
+                        delete state.allTasksContainer.allTasks[categoryToBeModified]
+                    }
                 }
             });
 
@@ -166,10 +134,6 @@ var store = createStore({
 
         setselectedCatgFilter(state, selectedCatg) {
             state.selectedCatg = selectedCatg;
-        },
-
-        updateAllTasks(state, tasks) {
-            state.allTasks = tasks;
         },
 
         setPercentageComplete(state, percentageRecieved) {
@@ -199,15 +163,34 @@ var store = createStore({
         allTasksNoCatgs(state) {
             return [].concat.apply([], Object.values(state.allTasksContainer.allTasks));
         },
+
+        completedTasks(state, getters) {
+            console.log(state)
+            var taskCount = 0;
+
+            getters.allTasksNoCatgs.forEach(task => {
+                if (task.status == true) {
+                    taskCount++
+                }
+            });
+
+            return taskCount;
+        },
+
+        uncompletedTasks(state, getters) {
+            console.log(state)
+            var taskCount = 0;
+
+            getters.allTasksNoCatgs.forEach(task => {
+                if (task.status == false) {
+                    taskCount++
+                }
+            });
+
+            return taskCount;
+        }
     }
 
 });
 
 export default store;
-
-    //#1
-    //Each task is an object, placed in its parent (task category) which an array of all tasks of the same type.
-
-    //All task categorises are an item in thier parent, an ojbect
-
-    //I adopted this method to see that each task is an object, and so task categories can be named
