@@ -72,7 +72,16 @@
                             @click="verifyChange(task)"
                         />
                     </div>
+
+                    <div
+                        class="error_message"
+                        v-if="task.errorMessageStatus"
+                    >
+                        You need to fill in a task <br />
+                        or delete the field entirely
+                    </div>
                 </div>
+
 
             </div>
 
@@ -133,10 +142,12 @@ export default {
 
         verifyChange(task) {
             if (task.descr == null || task.descr == '' || task.descr == " ") {
-                alert("Fill in the input field or delete the task")
+                task.errorMessageStatus = true;
+
             }
             else {
                  this.toggleEditStatus(task);
+                 task.errorMessageStatus = false;
             }
         },
 

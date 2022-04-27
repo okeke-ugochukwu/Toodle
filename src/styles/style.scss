@@ -207,9 +207,8 @@ header {
 .tasks {
 
     &_bars {
-        height: 230px;
-        overflow-y: visible;
-        @include noScrollBar();
+        // height: 230px;
+        // overflow-y: visible;
     // @include showAll();
 
 
@@ -242,6 +241,28 @@ header {
             &___edit {
                 @include flexCenter();
                 justify-content: space-between;
+                position: relative;
+
+                .error_message {
+                    position: absolute;
+                    top: -60px;
+                    background: $brightBlue;
+
+
+                    &::after {
+                        content: '';
+                        height: 8px;
+                        width: 8px;
+                        position: absolute;
+                        z-index: -1;
+                        left: 30px;
+                        top: 34px;
+                        border-radius: 4px;
+                        border-bottom: 15px solid $brightBlue;
+                        border-left: 15px solid $brightBlue;
+                        transform: rotate(-45deg);
+                    }
+                }
             }
 
             .header-icons {
@@ -410,34 +431,7 @@ header {
                     @include hoverPointer();
                 }
             }
-            .error_message {
-                font-size: 14px;
-                color: white;
-                background: $brightBlue;
-                border: 2px solid $brightBlue;
-                border-radius: 20px;
-                width: max-content;
-                padding: 8px 17px;
-                position: absolute;
-                top: -45px;
-                left: 30px;
-                z-index: 4;
 
-                &::after {
-                    content: '';
-                    height: 8px;
-                    width: 8px;
-                    position: absolute;
-                    z-index: -1;
-                    left: 30px;
-                    top: 18px;
-                    color: white;
-                    border-radius: 4px;
-                    border-bottom: 15px solid $brightBlue;
-                    border-left: 15px solid $brightBlue;
-                    transform: rotate(-45deg);
-                }
-            }
         }
 
         &:nth-child(3) {
@@ -471,6 +465,33 @@ header {
         }
     }
  }
+ .error_message {
+    font-size: 14px;
+    color: white;
+    background: $brightBlue;
+    border: 2px solid $brightBlue;
+    border-radius: 20px;
+    width: max-content;
+    padding: 8px 17px;
+    position: absolute;
+    top: -45px;
+    left: 30px;
+    z-index: 4;
+
+    &::after {
+        content: '';
+        height: 8px;
+        width: 8px;
+        position: absolute;
+        z-index: -1;
+        left: 30px;
+        top: 18px;
+        border-radius: 4px;
+        border-bottom: 15px solid $brightBlue;
+        border-left: 15px solid $brightBlue;
+        transform: rotate(-45deg);
+    }
+}
  .close_btn {
      width: 50px;
      height: 50px;

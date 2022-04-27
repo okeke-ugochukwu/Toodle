@@ -64,7 +64,6 @@
                 New task
             </button>
         </div>
-        {{newTask}}
     </div>
 </template>
 
@@ -139,7 +138,8 @@
                     category: this.newTask.category.toLowerCase().replace(" ", ""),
                     status: false,
                     editStatus: false,
-                    editButtonStatus: true
+                    editButtonStatus: true,
+                    errorMessageStatus: false
                 }
                 this.$store.commit('addNewTask', tempTaskObject);
                 this.$store.commit('toggleModal');
