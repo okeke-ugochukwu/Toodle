@@ -1,13 +1,12 @@
 <template>
     <sideBar />
-    <appFrame />
+    <router-view></router-view>
     <newTaskModal />
 
 </template>
 
 <script>
   import sideBar from './components/parents/sideBar.vue';
-  import appFrame from './components/parents/appFrame.vue';
   import newTaskModal from './components/parents/addNewTask.vue';
 
 
@@ -17,7 +16,6 @@
 
     components: {
       sideBar,
-      appFrame,
       newTaskModal
     },
 

@@ -10,16 +10,26 @@
                 </button>
             </div>
 
-            <div>
-
-            </div>
+            <nav>
+                <userStats />
+                <navBar />
+            </nav>
         </div>
     </div>
 </template>
 
 <script>
+
+import userStats from '../childs/sharedComponents/userStats.vue';
+import navBar from '../childs/sharedComponents/navBar.vue';
+
     export default {
         name: 'sideBar',
+
+        components: {
+            userStats,
+            navBar
+        },
 
         methods: {
             toggleSideBarStatus() {

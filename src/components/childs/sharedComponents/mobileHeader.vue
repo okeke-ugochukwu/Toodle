@@ -4,11 +4,11 @@
       class="hamburger"
       @click="toggleSideBarStatus"
     >
-      <menu-icon class="header-icons menu-icon"/>
+      <menu-icon class="icons menu-icon"/>
     </div>
 
     <div class="colorSwitch">
-      <moon-stars-icon class="header-icons dark-mode-icon"/>
+      <moon-stars-icon class="icons dark-mode-icon"/>
     </div>
 
   </header>

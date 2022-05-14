@@ -9,16 +9,20 @@
     "deploy": "sh deploy.sh"
   },
   "dependencies": {
+    "@babel/core": "^7.17.10",
+    "@tabler/icons": "^1.67.1",
     "core-js": "^3.6.5",
     "css.gg": "^2.0.0",
     "feather-icons": "^4.28.0",
     "vue": "^3.0.0",
+    "vue-router": "^4.0.14",
     "vue-tabler-icons": "^2.3.0",
     "vuex": "^4.0.0-0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.15",
     "@vue/cli-plugin-eslint": "~4.5.15",
+    "@vue/cli-plugin-router": "~4.5.15",
     "@vue/cli-plugin-vuex": "~4.5.15",
     "@vue/cli-service": "~4.5.15",
     "@vue/compiler-sfc": "^3.0.0",

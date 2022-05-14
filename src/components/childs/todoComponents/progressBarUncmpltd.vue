@@ -22,16 +22,16 @@
         },
         computed: {
             tasks() {
-                return this.$store.getters.allTasksNoCatgs
+                return this.$store.getters.allTasksNoCatgs;
             },
             numberOfTasks(){
                 return this.tasks.length;
             },
             completedTasks() {
-               return this.$store.getters.uncompletedTasks
+               return this.$store.getters.uncompletedTasks;
             },
             percentageComplete() {
-                return Math.ceil((this.uncompletedTasks / this.numberOfTasks) * 100)
+                return Math.ceil((this.uncompletedTasks / this.numberOfTasks) * 100);
             }
         },
 

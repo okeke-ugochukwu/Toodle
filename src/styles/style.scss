@@ -40,13 +40,15 @@
 body {
     width: 100%;
     height: 100vh;
-    background-color: $navyBlue;
+    // background-color: $navyBlue;
     font-family: 'Montserrat', sans-serif;
 }
 #app {
    width: 100%;
    height: 100%;
    position: relative;
+
+   @include flexCenter();
 }
 h4 {
     font-size: 15px;
@@ -70,16 +72,17 @@ section {
 }
 
 //main app
-.appFrame {
+.todoApp {
     width: 100%;
     max-width: 450px;
     margin: auto;
     height: 100%;
     padding: 55px 40px;
+    position: absolute;
+    top: 0;
     background-color: $white;
     overflow-x: hidden;
     z-index: 1;
-    position: relative;
     background: $white;
     @include noScrollBar();
 }
@@ -92,15 +95,88 @@ section {
 //side bar (which fills entire page in background
 .sideBar {
     width: 100%;
+    max-width: 450px;
+    margin: auto;
     height: 100%;
-    position: absolute;
     display: flex;
-    padding-left: 50px;
+    padding-left: 40px;
     color: $white;
     padding-top: 65px;
+    background-color: $navyBlue;
 
     .close_btn {
-        margin-left: 90px;
+        margin-left: 130px;
+    }
+
+    & > div {
+        width: max-content;
+        height: max-content;
+    }
+}
+nav {
+    width: 160px;
+
+    ul {
+        width: 100%;
+
+        li {
+            a {
+                display: flex;
+                align-items: center;
+                padding: 5px 0px 5px 5px;
+                margin-bottom: 3px;
+                color: $white;
+
+                svg {
+                    margin-right: 8px;
+                }
+
+                &.router-link-active {
+                    color: white;
+                }
+            }
+        }
+    }
+}
+.userStats{
+    margin-bottom: 20px;
+
+    h2 {
+        margin-left: 5px;
+        font-size: 35px;
+    }
+}
+
+.user {
+
+    &ProgressBar {
+        width: max-content;
+        height: max-content;
+        margin-bottom: 20px;
+        margin-top: -20px;
+        padding: 3px;
+        border-radius: 100%;
+        background: rgba(255, 255, 255, 0.188);
+    }
+
+    &ProgressBar_level {
+        width: max-content;
+        height: max-content;
+        padding:9px;
+        border-radius: 100%;
+        background: $darkBlue
+    }
+
+    &_avatar {
+        width: 85px;
+        height: 85px;
+        border-radius: 100%;
+        overflow: hidden;
+
+
+        img {
+            width: 100%;
+        }
     }
 }
 
@@ -126,7 +202,7 @@ header {
     @include hoverPointer();
     overflow: visible;
 }
-.header-icons {
+.icons {
     stroke: $grey;
     fill: none;
     stroke-linecap: round;
@@ -140,7 +216,7 @@ header {
     transform: scale(1.25);
     stroke-width: 1.85;
 }
-.icons {
+.icons2 {
     color: white;
     stroke-width: 2.2;
     transform: scale(1.2);
@@ -157,7 +233,7 @@ header {
 
 //categories section
 .catg {
-    @include showAll();
+    // @include showAll();
     overflow-x: hidden;
 
     &_scroll {
@@ -175,6 +251,7 @@ header {
         width: 220px;
         padding: 35px 15px 15px;
         margin-right: 20px;
+        position: relative;
 
         &__tskNum {
             color: $grey;
@@ -202,6 +279,46 @@ header {
 
 
 }
+.progress {
+    position: relative;
+
+    progress {
+        position: absolute;
+        height: 6px;
+        opacity: 0;
+    }
+
+    .dummyProgressBar {
+        width: 100%;
+        height: 6px;
+        background: $grey;
+        border-radius: 100px;
+        // overflow: hidden;
+
+        &_level {
+            height: 100%;
+            border-bottom-right-radius: 100px;
+            border-bottom-left-radius: 100px;
+            border-top-left-radius: 100px;
+            position: relative;
+            width: 6%;
+
+            // border-radius: 100px;
+            &::after {
+                content: '';
+                width: 6px;
+                height: 4px;
+                background: $purple;
+                position: absolute;
+                top: -4px;
+                right: 0;
+                border-top-right-radius: 100px;
+                border-top-left-radius: 100px;
+            }
+        }
+    }
+}
+
 
 //tasks section
 .tasks {
@@ -308,6 +425,7 @@ header {
     opacity: .6;
 }
 
+
 //new task button
 .newTaskBtn {
 
@@ -373,7 +491,7 @@ header {
     margin: auto;
     height: 100%;
     padding: 55px 40px;
-    background: white;
+    background: $white;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -394,6 +512,7 @@ header {
                 font-weight: 500;
                 border: none;
                 color: $desaturatedBlue;
+                background: transparent;;
 
                 &[type=submit] {
                     display: none;
@@ -532,9 +651,10 @@ header {
         max-height: 700px;
     }
     header {
-        display: none;
+        // display: none;
     }
     .sideBar {
-        display: none;
+        // display: none;
+        border-radius: 40px;
     }
 }

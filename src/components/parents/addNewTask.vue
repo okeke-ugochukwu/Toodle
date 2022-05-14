@@ -48,6 +48,7 @@
                     <option value="">
                         Select Category
                     </option>
+                    
                     <option
 
                         v-for="taskCategory in Object.entries(this.tasks)" :key="taskCategory.id"

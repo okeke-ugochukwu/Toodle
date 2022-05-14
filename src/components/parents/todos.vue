@@ -1,6 +1,6 @@
 <template>
   <div
-  class="appFrame"
+  class="todoApp"
   :class="{ sideBarShown: sideBarStatus }"
   >
 
@@ -18,15 +18,15 @@
 </template>
 
 <script>
-    import mobileHeader from "../childs/mobileHeader.vue";
-    import helloSection from "../childs/helloSection.vue";
-    import catgSection from "../childs/catgSection.vue";
-    import taskSection from "../childs/taskSection.vue";
-    import newTaskBtn from "../childs/newTaskBtn.vue";
+    import mobileHeader from "../childs/sharedComponents/mobileHeader.vue";
+    import helloSection from "../childs/todoComponents/helloSection.vue";
+    import catgSection from "../childs/todoComponents/catgSection.vue";
+    import taskSection from "../childs/todoComponents/taskSection.vue";
+    import newTaskBtn from "../childs/todoComponents/newTaskBtn.vue";
 
 
     export default {
-      name: "appFrame",
+      name: "todos",
 
       components: {
         mobileHeader,

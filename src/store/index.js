@@ -12,7 +12,9 @@ var store = createStore({
 
             modalStatus: false,
 
-            sideBarStatus: false
+            sideBarStatus: false,
+
+            username: 'Ugoo'
         }
     },
 

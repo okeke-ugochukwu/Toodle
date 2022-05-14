@@ -1,12 +1,21 @@
 
 <template>
-    <progress max="100" :value="percentageComplete">
+    <div class="progress">
+        <progress max="100" :value="percentageComplete">
 
-    </progress>
+        </progress>
 
-    <!-- {{completedTasks}} -->
-    <!-- {{uncompletedTasks}} -->
-    <!-- {{percentageComplete}} -->
+        <div class="dummyProgressBar">
+            <div class="dummyProgressBar_level">
+
+            </div>
+        </div>
+    </div>
+
+    {{completedTasks}}
+    {{uncompletedTasks}}
+    {{percentageComplete}}
+    {{numberOfTasks}}
 </template>
 
 <script>
@@ -16,22 +25,22 @@
 
         data() {
             return {
-                uncompletedTasks: undefined,
+                uncompletedTasks: 0,
                 temp: null
             }
         },
         computed: {
             tasks() {
-                return this.$store.getters.allTasksNoCatgs
+                return this.$store.getters.allTasksNoCatgs;
             },
             numberOfTasks(){
                 return this.tasks.length;
             },
             completedTasks() {
-                return this.numberOfTasks - this.uncompletedTasks
+                return this.numberOfTasks - this.uncompletedTasks;
             },
             percentageComplete() {
-                return Math.ceil((this.completedTasks / this.numberOfTasks) * 100)
+                return ((this.completedTasks / this.numberOfTasks) * 100);
             }
         },
 
@@ -43,7 +52,16 @@
                 deep: true,
                 immediate: true,
             },
+
+            percentageComplete: {
+                handler() {
+                    document.querySelector(".dummyProgressBar_level").style.width = this.percentageComplete + '%'
+                }
+            },
+
+
         },
+
 
         methods: {
             countUncompletedTasks(tasksList) {
@@ -74,6 +92,10 @@
 
             sendPercentageCompleted() {
                 this.$store.commit('setPercentageComplete', this.percentageComplete)
+            },
+
+            calPercentageComplete() {
+                ((this.completedTasks / this.numberOfTasks) * 100);
             }
 
         },
@@ -82,11 +104,12 @@
 
 <style lang="scss" scoped>
 
-    progress {
-        width: 100%;
-        background: #dfe4f4;
-        height: 6px;
-        // transition: 5s;
+@import '/src/styles/colors';
+
+    .dummyProgressBar {
+        &_level {
+            background: $purple
+        }
     }
 
 </style>
