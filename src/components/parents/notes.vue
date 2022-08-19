@@ -1,16 +1,20 @@
 <template>
-    <h1>
-        Hello World!
-    </h1>
-
-    <p>
-        Notes app coming soon
-    </p>
+    <mobileHeader />
 
 </template>
 
 <script>
-export default {
-    name: 'notes'
-}
+    import mobileHeader from "../childs/sharedComponents/mobileHeader.vue";
+
+    export default {
+        name: 'notes',
+
+        components: {
+            mobileHeader,
+        },
+
+        computed: {
+           
+        },
+    }
 </script>

@@ -1,20 +1,17 @@
 <template>
-  <div
-  class="todoApp"
-  :class="{ sideBarShown: sideBarStatus }"
-  >
 
-    <mobileHeader />
+  <mobileHeader />
 
-    <helloSection />
+  <helloSection />
 
-    <catgSection />
+  <catgSection />
 
-    <taskSection />
+  <taskSection />
 
-    <newTaskBtn />
+  <newTaskModal />
 
-  </div>
+  <newTaskBtn />
+
 </template>
 
 <script>
@@ -22,6 +19,7 @@
     import helloSection from "../childs/todoComponents/helloSection.vue";
     import catgSection from "../childs/todoComponents/catgSection.vue";
     import taskSection from "../childs/todoComponents/taskSection.vue";
+    import newTaskModal from '@/components/parents/addNewTask.vue';
     import newTaskBtn from "../childs/todoComponents/newTaskBtn.vue";
 
 
@@ -33,6 +31,7 @@
         helloSection,
         catgSection,
         taskSection,
+        newTaskModal,
         newTaskBtn,
       },
 
@@ -69,6 +68,8 @@
               this.sideBarStatus = false;
             }
           }
+
+           
         },
 
         hideSideBar() {

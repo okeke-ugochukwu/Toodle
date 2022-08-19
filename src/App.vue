@@ -1,22 +1,30 @@
 <template>
     <sideBar />
-    <router-view></router-view>
-    <newTaskModal />
+
+    <div 
+      class="toodleApps"
+      :class="{ sideBarShown: sideBarStatus }"
+    >
+      <router-view></router-view>
+    </div>
+
 
 </template>
 
 <script>
   import sideBar from './components/parents/sideBar.vue';
-  import newTaskModal from './components/parents/addNewTask.vue';
-
-
 
   export default {
     name: 'App',
 
     components: {
       sideBar,
-      newTaskModal
+    },
+
+    computed: {
+       sideBarStatus() {
+          return this.$store.state.sideBarStatus
+        },
     },
 
   }
