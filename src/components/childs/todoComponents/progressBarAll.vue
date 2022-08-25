@@ -5,6 +5,7 @@
 
         </progress>
 
+
         <div class="dummyProgressBar">
             <div class="dummyProgressBar_level" ref="dummyProgressBar_level">
 
@@ -12,10 +13,10 @@
         </div>
     </div>
 
-    {{completedTasks}}
+    <!-- {{completedTasks}}
     {{uncompletedTasks}}
     {{percentageComplete}}
-    {{numberOfTasks}}
+    {{numberOfTasks}} -->
 </template>
 
 <script>
@@ -40,7 +41,7 @@
                 return this.numberOfTasks - this.uncompletedTasks;
             },
             percentageComplete() {
-                return ((this.completedTasks / this.numberOfTasks) * 100);
+                return Math.ceil((this.completedTasks / this.numberOfTasks) * 100);
             }
             
         },
@@ -54,6 +55,10 @@
                 immediate: true,
             },
 
+            //this particular watcher is the most important
+            //it triggers the dummyProgressBar change
+            //basically makes the while thing work
+            
             percentageComplete: {
                 handler() {
 
@@ -115,12 +120,12 @@
 
 <style lang="scss" scoped>
 
-@import '/src/styles/colors';
+    @import '/src/styles/colors';
 
-    .dummyProgressBar {
-        &_level {
-            background: $purple
+        .dummyProgressBar {
+            &_level {
+                background: $purple
+            }
         }
-    }
 
 </style>

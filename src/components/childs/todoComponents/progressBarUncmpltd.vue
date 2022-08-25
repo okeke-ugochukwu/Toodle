@@ -1,8 +1,16 @@
 
 <template>
-    <progress max="100" :value="percentageComplete">
+    <div class="progress">
+        <progress max="100" :value="percentageComplete">
 
-    </progress>
+        </progress>
+
+        <div class="dummyProgressBar">
+            <div class="dummyProgressBar_level" ref="dummyProgressBar_level">
+
+            </div>
+        </div>
+    </div>
 
     <!-- {{completedTasks}} -->
     <!-- {{uncompletedTasks}} -->
@@ -43,6 +51,22 @@
                 deep: true,
                 immediate: true,
             },
+
+             percentageComplete: {
+                handler() {
+
+                    //this logic was created to prevent the '.dummyProgressBar_level' div's pseudo
+                    //element (ie. the progress indicator) from falling outside the the dummyProgressBar
+                    //when 'percentageComplete' is zero
+                    
+                    switch (this.percentageComplete) {
+                        case 0: this.$refs.dummyProgressBar_level.style.width = '6%';
+                        break;
+
+                        default: this.$refs.dummyProgressBar_level.style.width = this.percentageComplete + '%'
+                    }
+                }
+            },
         },
 
         methods: {
@@ -82,11 +106,15 @@
 
 <style lang="scss" scoped>
 
-    progress {
-        width: 100%;
-        background: #dfe4f4;
-        height: 6px;
-        // transition: 5s;
+
+    @import '/src/styles/colors';
+
+    .dummyProgressBar {
+        &_level {
+            background: $purple;
+            width: 100%;
+        }
     }
+
 
 </style>
