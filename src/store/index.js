@@ -4,7 +4,51 @@ import { createStore } from 'vuex'
 var store = createStore({
     state() {
         return { //#DS-101, myDocs.txt
-            allTasksContainer: { allTasks: { } },
+            allTasksContainer: { allTasks: {
+                Toodle: [
+                    {
+                        id: 1,
+                        descr: 'Fetch design file',
+                        category: 'Toodle',
+                        status: false,
+                        editStatus: false,
+                        editButtonStatus: true,
+                        errorMessageStatus: false
+                    },
+
+                    {
+                        id: 2,
+                        descr: 'Make new comprehensive comments',
+                        category: 'Toodle',
+                        status: false,
+                        editStatus: false,
+                        editButtonStatus: true,
+                        errorMessageStatus: false
+                    }
+                ],
+
+                Fun: [
+                    {
+                        id: 1,
+                        descr: 'Go swimming',
+                        category: 'Fun',
+                        status: false,
+                        editStatus: false,
+                        editButtonStatus: true,
+                        errorMessageStatus: false
+                    },
+
+                    {
+                        id: 2,
+                        descr: 'Make new comprehensive comments',
+                        category: 'Fun',
+                        status: false,
+                        editStatus: false,
+                        editButtonStatus: true,
+                        errorMessageStatus: false
+                    }
+                ]
+            } },
 
             selectedCatg: null,
 
@@ -33,7 +77,13 @@ var store = createStore({
 
             commit('deleteTask', zipContainer);
         }
+
+            //update to future maintainer (prolly myself)
+            //I don't remember why I went this route, I may have been high on cavy music
+            //But as basic as it looks, it's pretty important 
+            //no touch abeg.
     },
+    
 
     mutations: {
         addNewTask(state, taskObject) {
@@ -160,6 +210,7 @@ var store = createStore({
             }
         }
     },
+
 
     getters: {
         allTasksNoCatgs(state) {

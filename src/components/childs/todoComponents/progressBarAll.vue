@@ -6,7 +6,7 @@
         </progress>
 
         <div class="dummyProgressBar">
-            <div class="dummyProgressBar_level">
+            <div class="dummyProgressBar_level" ref="dummyProgressBar_level">
 
             </div>
         </div>
@@ -42,6 +42,7 @@
             percentageComplete() {
                 return ((this.completedTasks / this.numberOfTasks) * 100);
             }
+            
         },
 
         watch: {
@@ -55,7 +56,17 @@
 
             percentageComplete: {
                 handler() {
-                    document.querySelector(".dummyProgressBar_level").style.width = this.percentageComplete + '%'
+
+                    //this logic was created to prevent the '.dummyProgressBar_level' div's pseudo
+                    //element (ie. the progress indicator) from falling outside the the dummyProgressBar
+                    //when 'percentageComplete' is zero
+                    
+                    switch (this.percentageComplete) {
+                        case 0: this.$refs.dummyProgressBar_level.style.width = '6%';
+                        break;
+
+                        default: this.$refs.dummyProgressBar_level.style.width = this.percentageComplete + '%'
+                    }
                 }
             },
 

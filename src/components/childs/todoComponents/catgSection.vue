@@ -19,10 +19,10 @@
 
                     <div class="catg_card__tskNum">
                         <!--
-                            Target array member that's actual tasks data,
-                            Get the all  key pair values (arrays) which are the actual tasks (grouped), make an array out of these arrays
-                            Merge all the arrays (kay pair values) in the just created array in one
-                            At this point only individual tasks (objects) remain in the array. No nested arrays
+                            Target array member that's the actual tasks data,
+                            Get the all key pair values (arrays), which are the catgorized (in group) tasks, 
+                            Make an array out of these arrays by merging all the arrays (key pair values) into one
+                            At this point only individual tasks (objects) remain in the this array. No nested arrays
                             Now get number of these tasks and display
                          -->
                         {{ this.tasksNoCatgs.length }} tasks

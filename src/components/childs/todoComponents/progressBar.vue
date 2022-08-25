@@ -76,9 +76,10 @@
 
 <style lang="scss" scoped>
     progress {
-            width: 100%;
-            background: #dfe4f4;
-            height: 6px;
-            // transition: 5s;
-        }
+        width: 100%;
+        background: #dfe4f4;
+        height: 6px;
+        width: 100%;
+        // transition: 5s;
+    }
 </style>

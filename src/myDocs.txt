@@ -19,6 +19,56 @@
 
 
 #DS-101
-    Each task is an object, placed in its parent (task category) which an array of all tasks of the same type.
-    All task categorises are an item in thier parent, an ojbect
+    Each task is an object, placed in its parent (task category) which is an array of all tasks of the same type.
+    All task categorises are an item in thier parent, an ojbect 
     I adopted this method to see that each task is an object, and so task categories can be named
+    Swe demo data below
+
+DEMO DATA
+----------------------------
+allTasksContainer: { 
+    allTasks: {
+        Toodle: [
+            {
+                id: 1,
+                descr: 'Fetch design file',
+                category: 'Toodle',
+                status: false,
+                editStatus: false,
+                editButtonStatus: true,
+                errorMessageStatus: false
+            },
+
+            {
+                id: 2,
+                descr: 'Make new comprehensive comments',
+                category: 'Toodle',
+                status: false,
+                editStatus: false,
+                editButtonStatus: true,
+                errorMessageStatus: false
+            }
+        ],
+
+        Fun: [
+            {
+                id: 1,
+                descr: 'Go swimming',
+                category: 'Fun',
+                status: false,
+                editStatus: false,
+                editButtonStatus: true,
+                errorMessageStatus: false
+            },
+
+            {
+                id: 2,
+                descr: 'Make new comprehensive comments',
+                category: 'Fun',
+                status: false,
+                editStatus: false,
+                editButtonStatus: true,
+                errorMessageStatus: false
+            }
+        ]
+}   },
