@@ -1,4 +1,4 @@
-<template>
+""<template>
     <div
         class="newTaskModal"
         v-if="modalStatus === true"

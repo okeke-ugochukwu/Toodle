@@ -26,9 +26,9 @@
                 <div
                     v-if="task.editStatus == false"
                     class="tasks_bars__field___noEdit"
-                    :class="{completed2: task.status}"
                 >
-                    <label class="checkBox">
+
+                    <label class="checkBox" :style="getColorCode(task.category)">
                         <input type="checkbox" name="checkBox" id="checkBox" @click="checkTask(task)"/>
                     </label>
 
@@ -107,8 +107,8 @@ export default {
     },
 
      computed: {
-            tasks() {
-                return this.$store.state.allTasks
+            tasksColors() {
+                return this.$store.state.tasksCatgColors.catgs
             },
             tasksNoCatgs(){
                 return this.$store.getters.allTasksNoCatgs
@@ -166,6 +166,9 @@ export default {
 
         deleteTask(task) {
             this.$store.dispatch('initializeTaskDeletion', task)
+        },
+        getColorCode(taskCategory) {
+            return 'background: ' + this.tasksColors[taskCategory];
         }
     },
 }

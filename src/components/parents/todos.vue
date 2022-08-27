@@ -19,7 +19,7 @@
     import helloSection from "../childs/todoComponents/helloSection.vue";
     import catgSection from "../childs/todoComponents/catgSection.vue";
     import taskSection from "../childs/todoComponents/taskSection.vue";
-    import newTaskModal from '@/components/parents/addNewTask.vue';
+    import newTaskModal from '@/components/parents/newTaskModal.vue';
     import newTaskBtn from "../childs/todoComponents/newTaskBtn.vue";
 
 

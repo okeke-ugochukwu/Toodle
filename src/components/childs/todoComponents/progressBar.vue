@@ -5,13 +5,22 @@
         </progress>
 
         <div class="dummyProgressBar">
-            <div class="dummyProgressBar_level" ref="dummyProgressBar_level">
+            <div class="dummyProgressBar_level" 
+             ref="dummyProgressBar_level" 
+             :style="getColorCode()" 
+            >
+
+            <div 
+             class="dummyProgressBar_indc"
+              :style="getColorCode()" 
+            >
+                
+            </div>
 
             </div>
         </div>
     </div>
 
-    <!-- {{tasks}} -->
 </template>
 
 <script>
@@ -35,6 +44,9 @@
         computed: {
             tasks() {
                 return [].concat.apply([], Object.values(this.tasksInView[1]));
+            },
+             tasksColors() {
+                return this.$store.state.tasksCatgColors.catgs
             },
             numberOfTasks() {
               return  this.tasks.length;
@@ -93,6 +105,10 @@
 
                 });
 
+            },
+
+            getColorCode() {
+                return 'background: ' + this.tasksColors[this.tasksInView[0]];
             }
         }
     }
@@ -105,6 +121,22 @@
     .dummyProgressBar {
         &_level {
             background: $purple;
+
+            &::after {
+                display: none;
+            }
+        }
+
+        &_indc {
+            content: '';
+                width: 6px;
+                height: 4px;
+                background: $purple;
+                position: absolute;
+                top: -4px;
+                right: 0;
+                border-top-right-radius: 100px;
+                border-top-left-radius: 100px;
         }
     }
 

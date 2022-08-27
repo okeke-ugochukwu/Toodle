@@ -58,7 +58,6 @@
             //this particular watcher is the most important
             //it triggers the dummyProgressBar change
             //basically makes the while thing work
-            
             percentageComplete: {
                 handler() {
 

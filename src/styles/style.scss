@@ -345,7 +345,7 @@ header {
             &___noEdit {
                 display: flex;
                 @include flexCenter();
-                justify-content: space-between;
+                justify-content: unset;
 
                 & > div {
                     &:nth-child(2) {
@@ -406,21 +406,32 @@ header {
     }
 
     .checkBox {
-        width: 20px;
-        height: 20px;
+        width: 23px;
+        height: 23px;
         margin-right: 20px;
-        background: red;
+        margin-left: 10px;
+        border-radius: 100%;
+        background: $purple;
+        padding: 5px;
+        position: relative;
 
         @include flexCenter();
         @include hoverPointer();
+
+        &::after {
+            content: ' ';
+            position: absolute;
+            width: 80%;
+            height: 80%;
+            border-radius: 100%;
+            background: $white;
+        }
     }
 }
 .completed {
     text-decoration: line-through;
 }
-.completed2 {
-    justify-content: unset;
-}
+
 .completed3 {
     opacity: .6;
 }

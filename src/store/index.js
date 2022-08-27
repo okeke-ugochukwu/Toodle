@@ -4,51 +4,32 @@ import { createStore } from 'vuex'
 var store = createStore({
     state() {
         return { //#DS-101, myDocs.txt
-            allTasksContainer: { allTasks: {
-                Toodle: [
-                    {
-                        id: 1,
-                        descr: 'Fetch design file',
-                        category: 'Toodle',
-                        status: false,
-                        editStatus: false,
-                        editButtonStatus: true,
-                        errorMessageStatus: false
-                    },
+            allTasksContainer: { 
+                allTasks: {
+                   
+                } 
+            },
 
-                    {
-                        id: 2,
-                        descr: 'Make new comprehensive comments',
-                        category: 'Toodle',
-                        status: false,
-                        editStatus: false,
-                        editButtonStatus: true,
-                        errorMessageStatus: false
-                    }
-                ],
 
-                Fun: [
-                    {
-                        id: 1,
-                        descr: 'Go swimming',
-                        category: 'Fun',
-                        status: false,
-                        editStatus: false,
-                        editButtonStatus: true,
-                        errorMessageStatus: false
-                    },
+            tasksCatgColors: {
+                catgs: { 
+                    
+                }
+            },
 
-                    {
-                        id: 2,
-                        descr: 'Make new comprehensive comments',
-                        category: 'Fun',
-                        status: false,
-                        editStatus: false,
-                        editButtonStatus: true,
-                        errorMessageStatus: false
-                    }
-                ]
-            } },
+            colorGen() {
+                //using rgb color code format
+
+                var catgColor = []; 
+
+                for (let i = 0; i < 3 ; i++) { 
+                    catgColor.push(    Math.floor( Math.random() * (255 - 0) )     )
+                }
+
+
+                return catgColor;
+            },
+
 
             selectedCatg: null,
 
@@ -58,7 +39,9 @@ var store = createStore({
 
             sideBarStatus: false,
 
-            username: 'Ugoo'
+            username: 'Ugoo',
+
+           
         }
     },
 
@@ -92,12 +75,15 @@ var store = createStore({
             //assign the object to a fresh object
             //In that fresh object create a property named after the category property of the 'taskObject' passed into the function
             //create a new array, add the 'taskObject' to it and assign it as the value of the just created property
+
+            //create a random color code and repeat the same procedure above to add it to color code storage (tasksCatgColors)
             //creation and assigning of a new Object is the trigger vue's reactivity system
 
             if (Object.keys(state.allTasksContainer.allTasks).length == 0) {
 
-                //Refer to src/myDocs Ref-101 for the explanation of this logic
-
+                //Refer to src/myDocs Ref-101 for the explanation of this logic   
+                
+                //create category and add task
                 var theTasks =  state.allTasksContainer.allTasks = Object.defineProperty({}, taskObject.category, {
                     value: new Array(taskObject),
                     configurable: true,
@@ -111,6 +97,27 @@ var store = createStore({
                     enumerable: true,
                     writable: true
                 })
+
+
+                //create & add color code of the same category to the color code storage {tasksCatgColor}
+                let taskObjectCatgColor = state.colorGen();
+
+                var tasksColors = state.tasksCatgColors.catgs = Object.defineProperty({}, taskObject.category, {
+
+                    value: 'rgb(' + taskObjectCatgColor[0] + ',' +  taskObjectCatgColor[1] + ',' + taskObjectCatgColor[2] + ')',
+                    configurable: true,
+                    enumerable: true,
+                    writable: true
+
+                })
+
+                state.tasksCatgColors = Object.defineProperty({}, 'catgs', {
+                    value: tasksColors,
+                    configurable: true,
+                    enumerable: true,
+                    writable: true
+                } )
+            
 
             }
             else {
@@ -133,10 +140,11 @@ var store = createStore({
 
                         // var theTasks = state.allTasksContainer.allTasks = Object.assign({}, 0)
 
+                        
                         //get already existing object holding all tasks
                         var alreadyExistingTasksList = state.allTasksContainer.allTasks
 
-                        //create new category (and add the 'taskObject') by modifing the object
+                        //create new category (and add the 'taskObject') by modifing 'alreadyExistingTasksList'
                         Object.defineProperty(alreadyExistingTasksList, taskObject.category, {
                             value: new Array(taskObject),
                             configurable: true,
@@ -151,6 +159,32 @@ var store = createStore({
                             enumerable: true,
                             writable: true
                         })
+
+
+
+                        //In the same manner create color code for the new taskObject's category and add it to the 
+                        //color code storage (tasksCatgColors) using th same procedure above
+
+                        let taskObjectCatgColor = state.colorGen();
+
+                        var alreadyExistingColorStorage = state.tasksCatgColors.catgs;
+
+                        Object.defineProperty(alreadyExistingColorStorage, taskObject.category, {
+
+                            value: 'rgb(' + taskObjectCatgColor[0] + ',' +  taskObjectCatgColor[1] + ',' + taskObjectCatgColor[2] + ')',
+                            configurable: true,
+                            enumerable: true,
+                            writable: true
+
+                        })
+
+                        state.tasksCatgColors = Object.defineProperty({}, 'catgs', {
+                            value: alreadyExistingColorStorage,
+                            configurable: true,
+                            enumerable: true,
+                            writable: true
+                        })
+
 
                         break;
                     }
